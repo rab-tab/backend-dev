@@ -1,13 +1,16 @@
 package com.practice.rest.webservices.restwebservices.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
+import org.springframework.hateoas.EntityModel;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 public class UserController {
@@ -27,6 +30,15 @@ public class UserController {
         User user=service.findOne(id);
         if(user==null)
             throw new UserNotFoundException("id-"+id);
+
+        //"all-users", SERVER_PATH + "/users"
+        //retrieveAllUsers
+       /* EntityModel<User> resource = EntityModel.of(user);
+
+        WebMvcLinkBuilder linkTo =
+                linkTo(methodOn(this.getClass()).retrieveAllUsers());
+
+        resource.add(linkTo.withRel("all-users"));*/
         return user;
     }
 
