@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
@@ -33,12 +34,12 @@ public class UserController {
 
         //"all-users", SERVER_PATH + "/users"
         //retrieveAllUsers
-       /* EntityModel<User> resource = EntityModel.of(user);
+        EntityModel<User> resource = EntityModel.of(user);
 
-        WebMvcLinkBuilder linkTo =
+        WebMvcLinkBuilder linkToUsers =
                 linkTo(methodOn(this.getClass()).retrieveAllUsers());
 
-        resource.add(linkTo.withRel("all-users"));*/
+        resource.add(linkToUsers.withRel("all-users"));
         return user;
     }
 
