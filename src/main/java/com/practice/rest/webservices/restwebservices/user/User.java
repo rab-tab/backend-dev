@@ -5,9 +5,11 @@ import io.swagger.annotations.ApiModel;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
 @ApiModel(description = "All details about the user")
 @Entity
@@ -21,6 +23,9 @@ public class User {
 
     @Past
     private Date birthDate;
+
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
 
     public Integer getId() {
         return id;
@@ -62,5 +67,13 @@ public class User {
                 ", name='" + name + '\'' +
                 ", birthDate=" + birthDate +
                 '}';
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 }
